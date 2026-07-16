@@ -1,0 +1,375 @@
+diff --git a/src/api/menu.js b/src/api/menu.js
+index 272190f..a5d7b13 100644
+--- a/src/api/menu.js
++++ b/src/api/menu.js
+@@ -4,5 +4,9 @@ import { apiClient, unwrapResponse } from "./client";
+ export const getMenus = (categoryId) =>
+   apiClient.get(API_ENDPOINTS.menus, { params: { categoryId } }).then(unwrapResponse);
+ 
++/** Canonical Product Bible menu-list endpoint. */
++export const getKioskMenuList = (params) =>
++  apiClient.get(API_ENDPOINTS.kioskMenuList, { params }).then(unwrapResponse);
++
+ export const getMenu = (menuId) => apiClient.get(API_ENDPOINTS.menu(menuId)).then(unwrapResponse);
+ export const getMenuOptions = (menuId) => apiClient.get(API_ENDPOINTS.menuOptions(menuId)).then(unwrapResponse);
+diff --git a/src/components/kiosk/CategoryTabs.jsx b/src/components/kiosk/CategoryTabs.jsx
+index 5e27700..fbf008c 100644
+--- a/src/components/kiosk/CategoryTabs.jsx
++++ b/src/components/kiosk/CategoryTabs.jsx
+@@ -5,6 +5,7 @@ export default function CategoryTabs({
+   categories,
+   selectedCategoryId,
+   onSelectCategory,
++  isLoading = false,
+ }) {
+   return (
+     <div className="category-tabs">
+@@ -14,6 +15,7 @@ export default function CategoryTabs({
+           type="button"
+           className={selectedCategoryId === category.categoryId ? "active" : ""}
+           onClick={() => onSelectCategory(category.categoryId)}
++          disabled={isLoading}
+         >
+           {category.name}
+         </button>
+diff --git a/src/constants/api.js b/src/constants/api.js
+index 28be9be..c34f2be 100644
+--- a/src/constants/api.js
++++ b/src/constants/api.js
+@@ -2,6 +2,7 @@
+ export const API_BASE_PATH = "/api";
+ 
+ export const API_ENDPOINTS = Object.freeze({
++  kioskMenuList: "/kiosk/menuList",
+   categories: "/categories",
+   menus: "/menus",
+   menu: (menuId) => `/menus/${menuId}`,
+diff --git a/src/hooks/useMenu.js b/src/hooks/useMenu.js
+index e135d1c..7bd5670 100644
+--- a/src/hooks/useMenu.js
++++ b/src/hooks/useMenu.js
+@@ -1 +1,45 @@
+-// 학습용 자리표시자: 카테고리·메뉴·옵션 조회를 묶는 훅입니다.
++import { useCallback, useEffect, useState } from "react";
++import kioskMock from "../../public/mocks/kiosk.json";
++import { getKioskMenuList } from "@/api/menu";
++import {
++  toMenuCategories,
++  toMenuListViewModel,
++  toMockMenuListViewModel,
++} from "@/api/menuAdapter";
++
++const mockMenuList = toMockMenuListViewModel(kioskMock);
++
++/** Loads the canonical menu list while retaining the team's kiosk.json fallback. */
++export function useMenuList() {
++  const [state, setState] = useState({
++    categories: [],
++    menus: [],
++    status: "loading",
++    errorMessage: "",
++  });
++
++  const load = useCallback(async () => {
++    setState((previous) => ({ ...previous, status: "loading", errorMessage: "" }));
++    try {
++      const response = await getKioskMenuList();
++      setState({
++        categories: toMenuCategories(response),
++        menus: response.map(toMenuListViewModel),
++        status: "default",
++        errorMessage: "",
++      });
++    } catch {
++      setState({
++        ...mockMenuList,
++        status: "error",
++        errorMessage: "메뉴 정보를 불러오지 못해 임시 메뉴를 표시합니다.",
++      });
++    }
++  }, []);
++
++  useEffect(() => {
++    load();
++  }, [load]);
++
++  return { ...state, retry: load };
++}
+diff --git a/src/pages/kiosk/MenuListPage.jsx b/src/pages/kiosk/MenuListPage.jsx
+index d3726d0..dc871ed 100644
+--- a/src/pages/kiosk/MenuListPage.jsx
++++ b/src/pages/kiosk/MenuListPage.jsx
+@@ -1,34 +1,29 @@
+-// 학습용 자리표시자: SCR-002 메뉴 목록 화면입니다.
++// 학습용 자리표시자: SCR-003 메뉴 목록 화면입니다.
+ 
+ import Header from "@/components/kiosk/Header";
+ import CategoryTabs from "@/components/kiosk/CategoryTabs";
+ import React, { useState } from "react";
+-import kioskMock from "../../../public/mocks/kiosk.json";
+ import { useSearchParams, useNavigate } from "react-router-dom";
+ import MenuCard from "@/components/kiosk/MenuCard";
++import { useMenuList } from "@/hooks/useMenu";
+ 
+ 
+ export default function MenuListPage() {
+   const navigate = useNavigate();
++  const { categories, menus, status, errorMessage, retry } = useMenuList();
+ 
+   //-----카테고리-----
+ 
+-  //카테고리 데이터 연결
+-  const categories = kioskMock.categories.data;
+-
+   //페이지 이동시, 카테고리 초기화 방지
+   const [searchParams, setSearchParams] = useSearchParams();
+-  const selectedCategoryId =
+-    Number(searchParams.get("category")) || categories[0]?.categoryId;
++  const selectedCategoryId = searchParams.get("category") || categories[0]?.categoryId;
+ 
+   const handleSelectCategory = (categoryId) => {
+     setSearchParams({ category: categoryId });
+   };
+ 
+   //-----메뉴-----
+-  // json에 해당 데이터 없으면, undefined 에러 발생 방지 차원, 빈 배열 값 반환
+-  const menus =
+-    kioskMock.menusByCategory[String(selectedCategoryId)]?.data ?? [];
++  const visibleMenus = menus.filter((menu) => menu.categoryId === selectedCategoryId);
+ 
+   const [selectedMenuId, setSelectedMenuId] = useState(null);
+ 
+@@ -47,24 +42,34 @@ export default function MenuListPage() {
+         categories={categories}
+         selectedCategoryId={selectedCategoryId} // 선택한 카테고리
+         onSelectCategory={handleSelectCategory}
++        isLoading={status === "loading"}
+       ></CategoryTabs>
+ 
+       {/* 메뉴 카드 영역 */}
+       {/* 나열된 항목 구조라 ul > li 구조로 변경 */}
+-      {menus.length === 0 ? (
+-        <p className="empty-state">이 카테고리에는 메뉴가 없습니다.</p>
+-      ) : (
+-        <ul className="menuGrid">
+-          {menus.map((menu) => (
+-            <li key={menu.menuId}>
+-              <MenuCard
+-                menu={menu}
+-                isSelected={selectedMenuId === menu.menuId}
+-                onSelect={handleSelectMenu}
+-              />
+-            </li>
+-          ))}
+-        </ul>
++      {status === "loading" && <p className="empty-state">메뉴를 불러오는 중입니다.</p>}
++      {status === "error" && (
++        <div className="empty-state" role="alert">
++          <p>{errorMessage}</p>
++          <button type="button" onClick={retry}>다시 시도</button>
++        </div>
++      )}
++      {status !== "loading" && (
++        visibleMenus.length === 0 ? (
++          <p className="empty-state">이 카테고리에는 메뉴가 없습니다.</p>
++        ) : (
++          <ul className="menuGrid">
++            {visibleMenus.map((menu) => (
++              <li key={menu.menuId}>
++                <MenuCard
++                  menu={menu}
++                  isSelected={selectedMenuId === menu.menuId}
++                  onSelect={handleSelectMenu}
++                />
++              </li>
++            ))}
++          </ul>
++        )
+       )}
+ 
+ 
+diff --git a/src/api/menuAdapter.js b/src/api/menuAdapter.js
+new file mode 100644
+index 0000000..7b081e7
+--- /dev/null
++++ b/src/api/menuAdapter.js
+@@ -0,0 +1,41 @@
++const toCategoryId = (categoryCode) => String(categoryCode);
++
++export function toMenuListViewModel(menu) {
++  return {
++    menuId: menu.menuId,
++    categoryId: toCategoryId(menu.categoryCode),
++    name: menu.menuName,
++    price: menu.price,
++    imageUrl: menu.imageUrl,
++    baseKcal: menu.calories ?? 0,
++    isSoldOut: Boolean(menu.isSoldOut),
++    hasSoldOutIngredient: false,
++    soldOutBadges: [],
++  };
++}
++
++export function toMenuCategories(menus) {
++  const categories = new Map();
++  menus.forEach((menu) => {
++    const categoryId = toCategoryId(menu.categoryCode);
++    if (!categories.has(categoryId)) {
++      categories.set(categoryId, {
++        categoryId,
++        name: menu.displayCategoryName ?? menu.categoryCode,
++      });
++    }
++  });
++  return Array.from(categories.values());
++}
++
++export function toMockMenuListViewModel(kioskMock) {
++  return {
++    categories: kioskMock.categories.data.map((category) => ({
++      ...category,
++      categoryId: String(category.categoryId),
++    })),
++    menus: Object.values(kioskMock.menusByCategory)
++      .flatMap((response) => response.data)
++      .map((menu) => ({ ...menu, categoryId: String(menu.categoryId) })),
++  };
++}
+diff --git a/src/main/java/com/asak/backend/menu/KioskMenuController.java b/src/main/java/com/asak/backend/menu/KioskMenuController.java
+new file mode 100644
+index 0000000..600c5cb
+--- /dev/null
++++ b/src/main/java/com/asak/backend/menu/KioskMenuController.java
+@@ -0,0 +1,31 @@
++package com.asak.backend.menu;
++
++import com.asak.backend.common.dto.ApiResponse;
++import com.asak.backend.menu.dto.KioskMenuListItem;
++import java.util.List;
++import org.springframework.web.bind.annotation.GetMapping;
++import org.springframework.web.bind.annotation.RequestMapping;
++import org.springframework.web.bind.annotation.RequestParam;
++import org.springframework.web.bind.annotation.RestController;
++
++@RestController
++@RequestMapping("/api/kiosk")
++public class KioskMenuController {
++
++    private final KioskMenuCatalogService kioskMenuCatalogService;
++
++    public KioskMenuController(KioskMenuCatalogService kioskMenuCatalogService) {
++        this.kioskMenuCatalogService = kioskMenuCatalogService;
++    }
++
++    @GetMapping("/menuList")
++    public ApiResponse<List<KioskMenuListItem>> getMenuList(
++            @RequestParam(required = false) String categoryCode
++    ) {
++        return ApiResponse.ok(
++                "MENU_LIST_SUCCESS",
++                "Menu list retrieved successfully",
++                kioskMenuCatalogService.getMenuList(categoryCode)
++        );
++    }
++}
+diff --git a/src/main/java/com/asak/backend/menu/KioskMenuCatalogService.java b/src/main/java/com/asak/backend/menu/KioskMenuCatalogService.java
+new file mode 100644
+index 0000000..ba5f245
+--- /dev/null
++++ b/src/main/java/com/asak/backend/menu/KioskMenuCatalogService.java
+@@ -0,0 +1,28 @@
++package com.asak.backend.menu;
++
++import com.asak.backend.menu.dto.KioskMenuListItem;
++import java.util.List;
++import org.springframework.stereotype.Service;
++
++@Service
++public class KioskMenuCatalogService {
++
++    private static final List<KioskMenuListItem> MENU_CATALOG = List.of(
++            new KioskMenuListItem(364L, "스파이시 쉬림프 샌드위치", "NEW", "신메뉴", 8900, 464, "/assets/menu/364.png", true, false, List.of("NEW")),
++            new KioskMenuListItem(501L, "불고기 반미 샌드위치", "SANDWICH", "샌드위치", 7400, 510, "/assets/menu/501.png", true, false, List.of()),
++            new KioskMenuListItem(638L, "클래식 치킨 샌드위치", "SANDWICH", "샌드위치", 5900, 430, "/assets/menu/638.png", true, true, List.of()),
++            new KioskMenuListItem(768L, "그라브락스 연어 포케볼", "SALAD_BOWL", "샐러디·볼", 11400, 590, "/assets/menu/768.png", true, false, List.of()),
++            new KioskMenuListItem(908L, "칠리베이컨 곡물랩", "WRAP", "랩", 7400, 520, "/assets/menu/908.png", true, false, List.of()),
++            new KioskMenuListItem(1301L, "프로틴 치킨 볼", "PROTEIN", "프로틴", 9800, 610, "/assets/menu/1301.png", true, false, List.of("HIGH_PROTEIN"))
++    );
++
++    public List<KioskMenuListItem> getMenuList(String categoryCode) {
++        if (categoryCode == null || categoryCode.isBlank()) {
++            return MENU_CATALOG;
++        }
++
++        return MENU_CATALOG.stream()
++                .filter(menu -> menu.categoryCode().equalsIgnoreCase(categoryCode))
++                .toList();
++    }
++}
+diff --git a/src/main/java/com/asak/backend/menu/dto/KioskMenuListItem.java b/src/main/java/com/asak/backend/menu/dto/KioskMenuListItem.java
+new file mode 100644
+index 0000000..45c186d
+--- /dev/null
++++ b/src/main/java/com/asak/backend/menu/dto/KioskMenuListItem.java
+@@ -0,0 +1,17 @@
++package com.asak.backend.menu.dto;
++
++import java.util.List;
++
++public record KioskMenuListItem(
++        Long menuId,
++        String menuName,
++        String categoryCode,
++        String displayCategoryName,
++        int price,
++        int calories,
++        String imageUrl,
++        boolean isActive,
++        boolean isSoldOut,
++        List<String> tags
++) {
++}
+diff --git a/src/test/java/com/asak/backend/menu/KioskMenuControllerTest.java b/src/test/java/com/asak/backend/menu/KioskMenuControllerTest.java
+new file mode 100644
+index 0000000..461e76d
+--- /dev/null
++++ b/src/test/java/com/asak/backend/menu/KioskMenuControllerTest.java
+@@ -0,0 +1,37 @@
++package com.asak.backend.menu;
++
++import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
++import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
++import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
++
++import org.junit.jupiter.api.Test;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
++import org.springframework.boot.test.context.SpringBootTest;
++import org.springframework.test.web.servlet.MockMvc;
++
++@SpringBootTest
++@AutoConfigureMockMvc
++class KioskMenuControllerTest {
++
++    @Autowired
++    private MockMvc mockMvc;
++
++    @Test
++    void returnsCanonicalMenuListIncludingSoldOutState() throws Exception {
++        mockMvc.perform(get("/api/kiosk/menuList"))
++                .andExpect(status().isOk())
++                .andExpect(jsonPath("$.success").value(true))
++                .andExpect(jsonPath("$.code").value("MENU_LIST_SUCCESS"))
++                .andExpect(jsonPath("$.data[0].menuName").exists())
++                .andExpect(jsonPath("$.data[?(@.isSoldOut == true)]").isNotEmpty());
++    }
++
++    @Test
++    void filtersMenuListByCategoryCode() throws Exception {
++        mockMvc.perform(get("/api/kiosk/menuList").param("categoryCode", "WRAP"))
++                .andExpect(status().isOk())
++                .andExpect(jsonPath("$.data.length()").value(1))
++                .andExpect(jsonPath("$.data[0].categoryCode").value("WRAP"));
++    }
++}
+
