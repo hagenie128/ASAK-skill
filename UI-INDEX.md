@@ -1,6 +1,11 @@
 # ASAK UI 인덱스
 
-화면 하나를 고치려 할 때 **여기부터 본다.** 화면명 → Figma 노드 → 코드 파일 → 로컬 에셋 → 스크린샷 → 미구현 기능을 한 표에 모았다.
+화면 하나를 고치려 할 때 **여기부터 본다.** 화면명 → Figma 노드 → 코드 파일 → 로컬 에셋 → 스크린샷 → **데이터/동작 gap**을 한 표에 모았다.
+
+> **문서 입구:** [`ASAK/docs/START_HERE.md`](ASAK/docs/START_HERE.md)  
+> **2026-07-20 중요:** 표의 「미구현」= **API·훅·상태 연결**이 없다는 뜻이지, 화면 파일이 없다는 뜻이 아니다.  
+> Home→Cart는 **Zustand + mock 동작**한다. 아래 「3차 이식」일지는 *당시* 정적화 기록이며, 이후 store 흐름이 복구·확장되었다.  
+> 구현 현실 정본: [`ASAK/docs/wiki/current-status-baseline.md`](ASAK/docs/wiki/current-status-baseline.md) · [`CURRENT_IMPLEMENTATION_MAP.md`](ASAK/docs/planning/CURRENT_IMPLEMENTATION_MAP.md)
 
 세부 기록은 각 프로젝트 문서에 그대로 남아 있으며, 이 문서는 그 문서들을 대체하지 않고 진입점 역할만 한다.
 
@@ -41,24 +46,12 @@
 | Timeout | `134:7913` 계열 | `TimeoutPage.jsx` | — | [expired](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-timeout-1080x1920.png) · [warning](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-timeout-warning-1080x1920.png) · [continue](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-timeout-continue-1080x1920.png) | — |
 | Receipt | `3014:40926` 계열 | `ReceiptPage.jsx` | — | [preview](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-receipt-1080x1920.png) · [printing](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-receipt-printing-1080x1920.png) · [success](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-receipt-success-1080x1920.png) · [error](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-receipt-error-1080x1920.png) | — |
 
-상태 화면은 `/ui-preview/:screen/:state`로 확인한다.
-
-| screen | 지원 state |
-| --- | --- |
-| `home` | `default`, `high-contrast` (`selected`/`selection` 별칭) |
-| `menu` | `default`, `loading`, `empty`, `error`, `sold-out`, `with-cart`, `empty-cart`, `item-added`, `success` |
-| `detail` | `default`, `loading`, `error`, `sold-out`, `allergy`, `allergy-expanded`, `menu-limit`, `cart-limit`, `success`, `confirm`/`discard` |
-| `cart` | `default`, `empty`, `confirm`/`clear-confirm`, `delete-confirm`, `quantity-changed`, `option-updated`, `item-deleted`, `success` |
-| `payment` | `default`, `selected`/`selection`, `expanded`, `processing`/`progress`, `disabled`, `loading`, `error`/`network-error` |
-| `payment-error` | `declined`, `network-failure`/`network`, `retry`, `error` |
-| `timeout` | `expired`, `warning`, `continue` (`error`/`confirm`/`progress` 별칭) |
-| `accessibility` | `default`, `high-contrast`/`selection`, `reverted`/`success` |
-| `receipt` | `preview`, `printing`, `success`, `error` |
-| `complete` | `default`, `receiptPrint`/`receipt-print`, `receiptError`/`receipt-error` |
+`/ui-preview` 라우트는 **제거됨** (AI QA용). 상태 시안은 Figma 0718 `05-C` + [`FIGMA_0718_PROJECT_GAP.md`](ASAK/docs/design/FIGMA_0718_PROJECT_GAP.md) Gap Matrix로 확인한다.  
+힌트 파일 `UiStatePreviewPage.jsx`는 참고용만 남김.
 
 ### Kiosk에서 아직 화면 자체가 없는 것
 
-없음. SCR-012/013/023은 라우트·페이지로 이식됨. 상태 변형은 `/ui-preview/:screen/:state`로 확인.
+없음. SCR-012/013/023은 라우트·페이지로 이식됨. **상태 연결(선택·훅·Toast/Confirm 분기)** 은 Gap 문서의 PARTIAL/MISSING 열을 본다.
 
 ## Admin 화면
 
@@ -190,21 +183,19 @@ chrome --headless=new --disable-gpu --hide-scrollbars \
 
 Admin은 `--window-size=1920,1080`. 최신 전수 캡처: **2026-07-19 6차** (Kiosk 기본+상태 37장 · Admin 11장).
 
-## 2026-07-19 3차: Cursor 전수 이식 (정적 UI)
+## 2026-07-19 3차: Cursor 전수 이식 (정적 UI) — *이력*
+
+> **후속(2026-07-20):** Menu/Detail/Cart는 다시 **store + mock**으로 동작한다. 아래 목록의 「store 제거」는 3차 당시 기록일 뿐, 현재 코드와 다르다.
 
 기준: Figma `yHhvn5RKjBd91U8BJUQz7F`. CSS 파일 체계(`tokens.css` / `commonStyle.css` / `app-shell.css`)는 유지하고 섹션만 수정.
 
-### 이번에 한 일
+### 3차 당시 한 일 (이력)
 
-1. **Home `134:7721`** — 히어로 사진 + 오버레이, `매장에서 먹기`, fork/bag 아이콘, store/navigate 제거
-2. **Cart `134:7835`** — 정적 2항목 CartItemCard (빈 Zustand 대신)
-3. **Menu List / Detail** — store·checkout·addItem 흐름 제거, 정적 mock
-4. **Payment / Complete** — 정적 16,800원·주문번호
-5. **신규** — `/payment-error` SCR-012, `/timeout` SCR-013, `/receipt` SCR-023
-6. **`/ui-preview/:screen/:state`** — 실제 페이지 + `viewState`
-7. **스크린샷** — Kiosk·Admin 재캡처 (dev `127.0.0.1:5201` / `5202`)
-
-로고는 기존 로컬 에셋 유지. **사용자가 별도 이미지로 교체 예정.**
+1. **Home `134:7721`** — 히어로·주문 유형 UI
+2. **Cart / Menu** — Figma 레이아웃 이식 (이후 store 재연결)
+3. **Payment / Complete** — UI shell
+4. **신규** — `/payment-error`, `/timeout`, `/receipt`
+5. **스크린샷** — Kiosk·Admin 재캡처
 
 토큰: [ASAK/docs/design/FIGMA-TOKEN-REPORT.md](ASAK/docs/design/FIGMA-TOKEN-REPORT.md)
 

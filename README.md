@@ -15,13 +15,19 @@
 
 | 목적 | 경로 |
 | --- | --- |
+| **문서 시작 (단일 입구)** | [`ASAK/docs/START_HERE.md`](ASAK/docs/START_HERE.md) |
+| **구현 현실 (2026-07-20)** | [`ASAK/docs/wiki/current-status-baseline.md`](ASAK/docs/wiki/current-status-baseline.md) |
+| **WBS / 할 일** | [`ASAK/docs/wiki/wbs-v2.md`](ASAK/docs/wiki/wbs-v2.md) · [`wbs-status-notes.md`](ASAK/docs/wiki/wbs-status-notes.md) |
 | UI 화면 매핑 (Figma↔코드) | [`UI-INDEX.md`](UI-INDEX.md) |
-| 중앙 문서 허브 | [`ASAK/docs/README.md`](ASAK/docs/README.md) |
+| 중앙 문서 허브 | [`ASAK/docs/README.md`](ASAK/docs/README.md) · [`ASAK/PROJECT_HUB.md`](ASAK/PROJECT_HUB.md) |
+| 구현 맵 | [`ASAK/docs/planning/CURRENT_IMPLEMENTATION_MAP.md`](ASAK/docs/planning/CURRENT_IMPLEMENTATION_MAP.md) |
+| Kiosk 계획·구조 | [`ASAK-Kiosk/IMPLEMENTATION_PLAN.md`](ASAK-Kiosk/IMPLEMENTATION_PLAN.md) · [`STRUCTURE_GUIDE`](ASAK-Kiosk/src/STRUCTURE_GUIDE.md) |
+| Admin 계획·구조 | [`ASAK-Admin/IMPLEMENTATION_PLAN.md`](ASAK-Admin/IMPLEMENTATION_PLAN.md) · [`STRUCTURE_GUIDE`](ASAK-Admin/src/STRUCTURE_GUIDE.md) |
+| Backend 계획 | [`ASAK-back/IMPLEMENTATION_PLAN.md`](ASAK-back/IMPLEMENTATION_PLAN.md) |
 | Figma 토큰 보고서 | [`ASAK/docs/design/FIGMA-TOKEN-REPORT.md`](ASAK/docs/design/FIGMA-TOKEN-REPORT.md) |
-| Admin 개선 계획 | [`ASAK-Admin/docs/admin-improvement-plan-2026-07-19.md`](ASAK-Admin/docs/admin-improvement-plan-2026-07-19.md) |
-| Bruno API 컬렉션 | [`ASAK-back/api/`](ASAK-back/api/) |
+| Bruno API | [`ASAK-back/api/`](ASAK-back/api/) |
 
-구현 정본은 `ASAK/docs/product_bible/` 입니다. 각 앱의 실행 맥락은 해당 저장소 `README.md`를 보세요.
+정책 정본은 `ASAK/docs/product_bible/` ([얇은 안내](ASAK/docs/product_bible/README.md)). **한물간 문서**는 `ASAK/docs/archive/` — 실행에 쓰지 마세요.
 
 ## Git
 
