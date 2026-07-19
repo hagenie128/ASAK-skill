@@ -1,0 +1,14 @@
+{
+  "folders": [
+    { "name": "ASAK-workspace", "path": "." },
+    { "name": "ASAK", "path": "ASAK" },
+    { "name": "ASAK-Kiosk", "path": "ASAK-Kiosk" },
+    { "name": "ASAK-Admin", "path": "ASAK-Admin" },
+    { "name": "ASAK-back", "path": "ASAK-back" }
+  ],
+  "settings": {
+    "git.autoRepositoryDetection": true,
+    "git.detectSubmodules": true,
+    "git.repositoryScanMaxDepth": 2
+  }
+}
