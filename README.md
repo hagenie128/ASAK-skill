@@ -6,10 +6,20 @@ UI 작업을 시작한다면 **[UI-INDEX.md](UI-INDEX.md)** 를 먼저 보세요
 
 | 폴더 | 역할 | 원격 저장소 |
 | --- | --- | --- |
-| `ASAK` | 프론트 프로젝트 | `hagenie128/ASAK` |
+| `ASAK` | 프론트 프로젝트 + **중앙 문서** | `hagenie128/ASAK` |
 | `ASAK-Kiosk` | 주문 키오스크 | `hagenie128/ASAK-Kiosk` |
 | `ASAK-Admin` | 관리자 운영 화면 | `hagenie128/ASAK_Admin` |
 | `ASAK-back` | 백엔드 | `hagenie128/ASAK-back` |
+
+## 문서 어디서 보나
+
+| 목적 | 경로 |
+| --- | --- |
+| **루트 폴더가 왜 겹쳐 보이냐** | [`ROOT_FOLDER_MAP.md`](ROOT_FOLDER_MAP.md) ← 먼저 |
+| 중앙 문서 허브 | [`ASAK/docs/README.md`](ASAK/docs/README.md) |
+| 태그로 찾기 | [`ASAK/docs/DOCUMENT_TAG_INDEX.md`](ASAK/docs/DOCUMENT_TAG_INDEX.md) |
+| Product Bible 정본 | [`ASAK/docs/product_bible/`](ASAK/docs/product_bible/) |
+| 키오스크/관리자/백엔드 | 각 저장소 `README.md` |
 
 ## Git 저장소 구조
 
