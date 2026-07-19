@@ -156,12 +156,12 @@ Figma `227:5009`. 모든 관리자 화면이 이 instance를 공유하므로, �
 | Kiosk SCR-012/013/023 | 완료 | 결제오류·타임아웃·영수증 라우트 이식 |
 | 상태 변형 | 완료 | `/ui-preview/:screen/:state` + toast/confirm/allergy 캡처 |
 
-토큰 이탈·중복·파일 밖 참조는 **[FIGMA-TOKEN-REPORT.md](FIGMA-TOKEN-REPORT.md)** 에 따로 정리했다.
+토큰 이탈·중복·파일 밖 참조는 **[ASAK/docs/design/FIGMA-TOKEN-REPORT.md](ASAK/docs/design/FIGMA-TOKEN-REPORT.md)** 에 따로 정리했다.
 
 ### 2차에서 발견해 고친 결함
 
 1. **`.sr-only` 미정의.** 관리자 CSS에 정의가 없어 스크린리더용 숨김 라벨이 화면에 그대로 노출됐다(메뉴 관리 검색창). 공통 규칙으로 추가했다.
-2. **Dashboard MainContent 위치.** Figma에서 이 프레임만 `(301,16)`에 놓여 있는데 폭이 `1616 = 1920 - 240 - 32*2`라 의도는 `(240,0)`이다. 다른 화면(매출·결제·메뉴)은 모두 `240`이므로 코드는 `240` 기준으로 통일했다. ~~Figma에서 이 프레임을 61px 왼쪽으로 옮기면 파일이 일관돼진다.~~ → **2026-07-19 Figma에서 `(240,0)`으로 이동 완료** (FIGMA-TOKEN-REPORT §10 참고).
+2. **Dashboard MainContent 위치.** Figma에서 이 프레임만 `(301,16)`에 놓여 있는데 폭이 `1616 = 1920 - 240 - 32*2`라 의도는 `(240,0)`이다. 다른 화면(매출·결제·메뉴)은 모두 `240`이므로 코드는 `240` 기준으로 통일했다. ~~Figma에서 이 프레임을 61px 왼쪽으로 옮기면 파일이 일관돼진다.~~ → **2026-07-19 Figma에서 `(240,0)`으로 이동 완료** ([FIGMA-TOKEN-REPORT](ASAK/docs/design/FIGMA-TOKEN-REPORT.md) §10 참고).
 3. **품절 관리의 중복 야채 장식.** 페이지가 `position: fixed`로 사이드바 위에 겹쳐 그리고 있었다. 제거.
 4. **`CartItem`에 CSS 클래스가 하나도 없었다.** 마크업만 있고 스타일이 없어 장바구니 항목이 무스타일로 나왔다. 장바구니가 비어 있어 이제껏 아무도 못 본 상태였다.
 5. **주문 완료 화면 하단 버튼이 세로로 쌓여 화면 밖으로 잘렸다.** `.order-complete-page__footer`에 grid 선언이 빠져 있었다.
@@ -206,7 +206,7 @@ Admin은 `--window-size=1920,1080`. 최신 전수 캡처: **2026-07-19 6차** (K
 
 로고는 기존 로컬 에셋 유지. **사용자가 별도 이미지로 교체 예정.**
 
-토큰: [FIGMA-TOKEN-REPORT.md](FIGMA-TOKEN-REPORT.md)
+토큰: [ASAK/docs/design/FIGMA-TOKEN-REPORT.md](ASAK/docs/design/FIGMA-TOKEN-REPORT.md)
 
 ## 2026-07-19 4차: 상태·매출 분리
 
