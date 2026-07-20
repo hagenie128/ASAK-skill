@@ -9,6 +9,17 @@
   "settings": {
     "git.autoRepositoryDetection": true,
     "git.detectSubmodules": true,
-    "git.repositoryScanMaxDepth": 2
+    "git.detectSubmodulesLimit": 10,
+    "git.repositoryScanMaxDepth": 3,
+    "git.scanRepositories": [
+      ".",
+      "ASAK",
+      "ASAK-Kiosk",
+      "ASAK-Admin",
+      "ASAK-back"
+    ],
+    "scm.alwaysShowRepositories": true,
+    "scm.repositories.visible": 10,
+    "java.compile.nullAnalysis.mode": "automatic"
   }
 }
