@@ -12,7 +12,7 @@
 | 문서 | 다루는 내용 |
 | --- | --- |
 | [ASAK-Kiosk/docs/figma-ui-handoff.md](ASAK-Kiosk/docs/figma-ui-handoff.md) | 키오스크 화면 매핑, 상태 화면 preview route, Foundation token 정리 제안 |
-| [ASAK-Kiosk/docs/figma-logo-asset-log.md](ASAK-Kiosk/docs/figma-logo-asset-log.md) | 키오스크 로고·헤더·결제 에셋의 출처와 캡처 위치 |
+| [ASAK-Kiosk/docs/figma-logo-asset-log-2026-07-18.md](ASAK-Kiosk/docs/figma-logo-asset-log-2026-07-18.md) | 키오스크 로고·헤더·결제 에셋 출처 + **2026-07-21 SVG 로고 팩** (`logo-S/L/F` ± dark) |
 | [ASAK-Admin/docs/figma-visual-parity-log.md](ASAK-Admin/docs/figma-visual-parity-log.md) | 관리자 노드별 시각 대조, 효과 대체, 토큰 제안 |
 | [ASAK-Admin/docs/ui-implementation-map.md](ASAK-Admin/docs/ui-implementation-map.md) | 관리자 라우트별 이식 파일과 데이터 연결 경계 |
 | [ASAK-Admin/docs/07-figma-mcp-implementation-guide.md](ASAK-Admin/docs/07-figma-mcp-implementation-guide.md) | 관리자 Figma 이식 절차 |
@@ -35,12 +35,12 @@
 
 | 화면 | Figma 노드 | 코드 파일 | 로컬 에셋 | 스크린샷 | 미구현 |
 | --- | --- | --- | --- | --- | --- |
-| Home | `134:7721` / HC `224:12713` | `pages/kiosk/HomePage.jsx`, `components/kiosk/OrderTypeSelector.jsx` | `assets/figma/asak-logo-home-light.png` | [기본](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-home-1080x1920.png) · [고대비](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-home-high-contrast-1080x1920.png) | — |
-| Menu List | `134:7792` | `pages/kiosk/MenuListPage.jsx`, `CategoryTabs.jsx`, `MenuCard.jsx`, `MenuListFooter.jsx` | `assets/figma/kiosk-header-logo.svg`, `icon-kiosk-back.svg`, `icon-kiosk-home.svg` | [기본](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-list-1080x1920.png) · [toast](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-list-toast-1080x1920.png) · [loading](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-list-loading-1080x1920.png) · [empty](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-list-empty-1080x1920.png) · [error](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-list-error-1080x1920.png) · [sold-out](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-list-sold-out-1080x1920.png) · [with-cart](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-list-with-cart-1080x1920.png) | 카테고리 API |
+| Home | `134:7721` / HC `224:12713` | `pages/kiosk/HomePage.jsx`, `components/kiosk/OrderTypeSelector.jsx` | `assets/svg/logo-F-dark.svg` | [기본](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-home-1080x1920.png) · [고대비](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-home-high-contrast-1080x1920.png) | — |
+| Menu List | `134:7792` | `pages/kiosk/MenuListPage.jsx`, `CategoryTabs.jsx`, `MenuCard.jsx`, `MenuListFooter.jsx` | `assets/svg/logo-L.svg` (Header), `icon-kiosk-back.svg`, `icon-kiosk-home.svg` | [기본](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-list-1080x1920.png) · [toast](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-list-toast-1080x1920.png) · [loading](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-list-loading-1080x1920.png) · [empty](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-list-empty-1080x1920.png) · [error](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-list-error-1080x1920.png) · [sold-out](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-list-sold-out-1080x1920.png) · [with-cart](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-list-with-cart-1080x1920.png) | 카테고리 API |
 | Menu Detail | `134:7810` | `MenuDetailPage.jsx`, `AllergenAccordion.jsx`, `KioskToast.jsx`, `KioskConfirmDialog.jsx` | `public/assets/menu/*.png` | [기본](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-detail-1080x1920.png) · [allergy](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-detail-allergy-1080x1920.png) · [toast](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-detail-toast-1080x1920.png) · [confirm](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-menu-detail-confirm-1080x1920.png) | 장바구니 수정 흐름 |
 | Cart | `134:7835` | `CartPage.jsx`, `CartItem.jsx`, `QuantityStepper.jsx` | — | [기본](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-cart-1080x1920.png) · [confirm](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-cart-confirm-1080x1920.png) · [toast](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-cart-toast-1080x1920.png) · [empty](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-cart-empty-1080x1920.png) | 품절 처리 |
 | Payment | `134:7861` 계열 | `PaymentPage.jsx` | `icon-kiosk-card.svg`, `logo-kakaopay.png`, `payment-processing-illustration.png` | [기본](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-payment-1080x1920.png) · [selected](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-payment-selected-1080x1920.png) · [expanded](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-payment-expanded-1080x1920.png) · [processing](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-payment-processing-1080x1920.png) · [disabled](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-payment-disabled-1080x1920.png) · [loading](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-payment-loading-1080x1920.png) · [load-error](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-payment-error-load-1080x1920.png) | 결제 요청 |
-| Order Complete | 0718 `134:7926` (0714 레이아웃) | `OrderCompletePage.jsx` | `order-complete-ticket.svg`, `asak-s-logo.svg`, `order-complete-barcode.svg` | [기본](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-complete-1080x1920.png) · [receiptPrint](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-complete-receipt-print-1080x1920.png) · [receiptError](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-complete-receipt-error-1080x1920.png) | 출력·자동 홈 복귀 |
+| Order Complete | 0718 `134:7926` (0714 레이아웃) | `OrderCompletePage.jsx` | `order-complete-ticket.svg`, `assets/svg/logo-S.svg`, `order-complete-barcode.svg` | [기본](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-complete-1080x1920.png) · [receiptPrint](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-complete-receipt-print-1080x1920.png) · [receiptError](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-complete-receipt-error-1080x1920.png) | 출력·자동 홈 복귀 |
 | Accessibility | `134:7972` / HC `134:8005` | `AccessibilityPage.jsx` | — | [기본](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-accessibility-1080x1920.png) · [고대비](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-accessibility-high-contrast-1080x1920.png) | 고대비·글자 크기 전역 적용 |
 | Payment Error | `134:7900` 계열 | `PaymentErrorPage.jsx` | — | [declined](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-payment-error-1080x1920.png) · [network](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-payment-error-network-1080x1920.png) · [retry](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-payment-error-retry-1080x1920.png) | — |
 | Timeout | `134:7913` 계열 | `TimeoutPage.jsx` | — | [expired](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-timeout-1080x1920.png) · [warning](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-timeout-warning-1080x1920.png) · [continue](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-timeout-continue-1080x1920.png) | — |
@@ -59,7 +59,8 @@
 
 | 화면 | 경로 | Figma 노드 | 코드 파일 | 스크린샷 | 미구현 |
 | --- | --- | --- | --- | --- | --- |
-| Live Order | `/` | `235:6361` / `134:10607` | `OrderListPage.jsx`, `LiveOrderPreview.jsx` | [기본](ASAK-Admin/docs/screenshots/2026-07-19-admin-live-orders-1920x1080.png) | 주문 조회, 상태 전이, TTS |
+| Live Order | `/` (로그인 후 홈) | `235:6361` / `134:10607` | `OrderListPage.jsx`, `LiveOrderPreview.jsx` | [기본](ASAK-Admin/docs/screenshots/2026-07-19-admin-live-orders-1920x1080.png) | 주문 조회, 상태 전이, TTS |
+| Login | `/`·`/login` (비로그인 진입) | `134:12033` | `LoginPage.jsx` · `auth/adminSession.js` | [기본](ASAK-Admin/docs/screenshots/2026-07-19-admin-login-1920x1080.png) | 실인증 API (현재 mock 세션) |
 | Dashboard | `/dashboard` | `227:5008` | `DashboardPage.jsx`, `AdminTopHeader.jsx` | [기본](ASAK-Admin/docs/screenshots/2026-07-19-admin-dashboard-1920x1080.png) | KPI·최근주문 adapter |
 | Order Management | `/orders` | `134:10630` | `OrderManagementPreview.jsx` | [기본](ASAK-Admin/docs/screenshots/2026-07-19-admin-order-management-1920x1080.png) | 필터·검색·페이지네이션 |
 | Sold-out | `/sold-out` | `241:14211` / `134:11863` | `SoldOutManagePage.jsx` | [기본](ASAK-Admin/docs/screenshots/2026-07-19-admin-sold-out-1920x1080.png) | 품절 draft store, 저장 |
@@ -69,11 +70,10 @@
 | Sales Summary | `/sales` | `134:10661` | `SalesSummaryPage.jsx` | [기본](ASAK-Admin/docs/screenshots/2026-07-19-admin-sales-1920x1080.png) | 기간 필터, sales adapter |
 | Daily Sales | `/sales/daily` | `134:11150` | `DailySalesPage.jsx` | [기본](ASAK-Admin/docs/screenshots/2026-07-19-admin-sales-daily-1920x1080.png) | 일별 adapter |
 | Monthly Sales | `/sales/monthly` | `134:10957` | `MonthlySalesPage.jsx` | [기본](ASAK-Admin/docs/screenshots/2026-07-19-admin-sales-monthly-1920x1080.png) | 월별 adapter |
-| Login | `/login` | `134:12033` | `LoginPage.jsx` | [기본](ASAK-Admin/docs/screenshots/2026-07-19-admin-login-1920x1080.png) | 인증 API, 세션 |
 
 공통 상단바는 `AdminTopHeader` (`241:14215` 기준). MainContent 여백은 `padding: 40px`, 헤더↔본문 `gap: 24px`, 패널 `overflow: clip`.
 
-관리자 에셋은 전부 `ASAK-Admin/src/assets/figma/` 안에 있다: `asak-admin-logo.svg`, `asak-s-logo.svg`, `asak-s-logo-live.svg`, `icon-nav-*.svg`(7종), `icon-nav-caret-down.svg`, `icon-nav-signout.svg`, `promo-lettuce.png`, `promo-carrot.png`, `icon-order-*.svg`, `soldout-*.png`.
+관리자 에셋: `ASAK-Admin/src/assets/svg/logo-{S,L,F}.svg` (± dark) · 레거시 `assets/figma/` (`asak-admin-logo.svg`, `asak-login-logo.svg`, `asak-s-logo.svg`, `asak-s-logo-live.svg`, `icon-nav-*.svg`(7종), `icon-nav-caret-down.svg`, `icon-nav-signout.svg`, `promo-lettuce.png`, `promo-carrot.png`, `icon-order-*.svg`, `soldout-*.png`).
 
 ### Admin에서 아직 화면 자체가 없는 것
 
@@ -233,3 +233,10 @@ Admin은 `--window-size=1920,1080`. 최신 전수 캡처: **2026-07-19 6차** (K
 - 피그마 `yHhvn5RKjBd91U8BJUQz7F` / `134:7926`에 0714 비주얼(티켓·S로고·바코드 SVG) + 0718 컴포넌트(Header/BottomCTA/Pretendard) 반영
 - 코드 기준 노드를 `134:7926`으로 갱신, 라벨 40 / 안내 32 / CTA `#b5e30f`·180px, `order-complete-barcode.svg` 추가
 - 상태 프레임: Default · Receipt Print · Receipt Error (y=13960)
+
+## 2026-07-21: 브랜드 SVG 로고 팩 추가·코드 적용
+
+- `ASAK-Kiosk/src/assets/svg/`에 `logo-S` / `logo-L` / `logo-F` (+ 각 `-dark`) 6파일
+- 코드 적용: Home=`logo-F-dark`, Header=`logo-L`, Order Complete=`logo-S`
+- Admin도 동일 브랜드 공유: `ASAK-Admin/src/assets/svg/`에 S/L/F 복사 · Sidebar=`logo-L`+`logo-S`, LiveOrder=`logo-S`, Login=`logo-F`
+- 상세: [figma-logo-asset-log-2026-07-18.md](ASAK-Kiosk/docs/figma-logo-asset-log-2026-07-18.md)
