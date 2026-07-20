@@ -7,10 +7,8 @@
 _rollback_backup/
 asak-agent-kit/
 
-# Editor (.vscode GIF·설정은 Power Mode 등 공유용으로 추적)
-.vscode/*
-!.vscode/*.gif
-!.vscode/settings.json
+# Editor
+.vscode/
 .idea/
 *.swp
 *.swo
