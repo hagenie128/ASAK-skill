@@ -5,7 +5,7 @@
 > **문서 입구:** [`ASAK/docs/START_HERE.md`](ASAK/docs/START_HERE.md)  
 > **2026-07-20 중요:** 표의 「미구현」= **API·훅·상태 연결**이 없다는 뜻이지, 화면 파일이 없다는 뜻이 아니다.  
 > Home→Cart는 **Zustand + mock 동작**한다. 아래 「3차 이식」일지는 *당시* 정적화 기록이며, 이후 store 흐름이 복구·확장되었다.  
-> 구현 현실 정본: [`ASAK/docs/wiki/current-status-baseline.md`](ASAK/docs/wiki/current-status-baseline.md) · [`CURRENT_IMPLEMENTATION_MAP.md`](ASAK/docs/planning/CURRENT_IMPLEMENTATION_MAP.md)
+> 구현 현실 정본: [`ASAK/docs/wiki/current-status-baseline.md`](ASAK/docs/wiki/current-status-baseline.md) · [`current-implementation-map-2026-07-16.md`](ASAK/docs/planning/current-implementation-map-2026-07-16.md)
 
 세부 기록은 각 프로젝트 문서에 그대로 남아 있으며, 이 문서는 그 문서들을 대체하지 않고 진입점 역할만 한다.
 
@@ -46,7 +46,7 @@
 | Timeout | `134:7913` 계열 | `TimeoutPage.jsx` | — | [expired](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-timeout-1080x1920.png) · [warning](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-timeout-warning-1080x1920.png) · [continue](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-timeout-continue-1080x1920.png) | — |
 | Receipt | `3014:40926` 계열 | `ReceiptPage.jsx` | — | [preview](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-receipt-1080x1920.png) · [printing](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-receipt-printing-1080x1920.png) · [success](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-receipt-success-1080x1920.png) · [error](ASAK-Kiosk/docs/screenshots/2026-07-19-kiosk-receipt-error-1080x1920.png) | — |
 
-`/ui-preview` 라우트는 **제거됨** (AI QA용). 상태 시안은 Figma 0718 `05-C` + [`FIGMA_0718_PROJECT_GAP.md`](ASAK/docs/design/FIGMA_0718_PROJECT_GAP.md) Gap Matrix로 확인한다.  
+`/ui-preview` 라우트는 **제거됨** (AI QA용). 상태 시안은 Figma 0718 `05-C` + [`figma-0718-project-gap.md`](ASAK/docs/design/figma-0718-project-gap.md) Gap Matrix로 확인한다.  
 힌트 파일 `UiStatePreviewPage.jsx`는 참고용만 남김.
 
 ### Kiosk에서 아직 화면 자체가 없는 것
@@ -149,12 +149,12 @@ Figma `227:5009`. 모든 관리자 화면이 이 instance를 공유하므로, �
 | Kiosk SCR-012/013/023 | 완료 | 결제오류·타임아웃·영수증 라우트 이식 |
 | 상태 변형 | 완료 | `/ui-preview/:screen/:state` + toast/confirm/allergy 캡처 |
 
-토큰 이탈·중복·파일 밖 참조는 **[ASAK/docs/design/FIGMA-TOKEN-REPORT.md](ASAK/docs/design/FIGMA-TOKEN-REPORT.md)** 에 따로 정리했다.
+토큰 이탈·중복·파일 밖 참조는 **[ASAK/docs/design/figma-token-report.md](ASAK/docs/design/figma-token-report.md)** 에 따로 정리했다.
 
 ### 2차에서 발견해 고친 결함
 
 1. **`.sr-only` 미정의.** 관리자 CSS에 정의가 없어 스크린리더용 숨김 라벨이 화면에 그대로 노출됐다(메뉴 관리 검색창). 공통 규칙으로 추가했다.
-2. **Dashboard MainContent 위치.** Figma에서 이 프레임만 `(301,16)`에 놓여 있는데 폭이 `1616 = 1920 - 240 - 32*2`라 의도는 `(240,0)`이다. 다른 화면(매출·결제·메뉴)은 모두 `240`이므로 코드는 `240` 기준으로 통일했다. ~~Figma에서 이 프레임을 61px 왼쪽으로 옮기면 파일이 일관돼진다.~~ → **2026-07-19 Figma에서 `(240,0)`으로 이동 완료** ([FIGMA-TOKEN-REPORT](ASAK/docs/design/FIGMA-TOKEN-REPORT.md) §10 참고).
+2. **Dashboard MainContent 위치.** Figma에서 이 프레임만 `(301,16)`에 놓여 있는데 폭이 `1616 = 1920 - 240 - 32*2`라 의도는 `(240,0)`이다. 다른 화면(매출·결제·메뉴)은 모두 `240`이므로 코드는 `240` 기준으로 통일했다. ~~Figma에서 이 프레임을 61px 왼쪽으로 옮기면 파일이 일관돼진다.~~ → **2026-07-19 Figma에서 `(240,0)`으로 이동 완료** ([FIGMA-TOKEN-REPORT](ASAK/docs/design/figma-token-report.md) §10 참고).
 3. **품절 관리의 중복 야채 장식.** 페이지가 `position: fixed`로 사이드바 위에 겹쳐 그리고 있었다. 제거.
 4. **`CartItem`에 CSS 클래스가 하나도 없었다.** 마크업만 있고 스타일이 없어 장바구니 항목이 무스타일로 나왔다. 장바구니가 비어 있어 이제껏 아무도 못 본 상태였다.
 5. **주문 완료 화면 하단 버튼이 세로로 쌓여 화면 밖으로 잘렸다.** `.order-complete-page__footer`에 grid 선언이 빠져 있었다.
@@ -197,7 +197,7 @@ Admin은 `--window-size=1920,1080`. 최신 전수 캡처: **2026-07-19 6차** (K
 4. **신규** — `/payment-error`, `/timeout`, `/receipt`
 5. **스크린샷** — Kiosk·Admin 재캡처
 
-토큰: [ASAK/docs/design/FIGMA-TOKEN-REPORT.md](ASAK/docs/design/FIGMA-TOKEN-REPORT.md)
+토큰: [ASAK/docs/design/figma-token-report.md](ASAK/docs/design/figma-token-report.md)
 
 ## 2026-07-19 4차: 상태·매출 분리
 

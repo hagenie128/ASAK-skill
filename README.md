@@ -18,13 +18,14 @@
 | **문서 시작 (단일 입구)** | [`ASAK/docs/START_HERE.md`](ASAK/docs/START_HERE.md) |
 | **구현 현실 (2026-07-20)** | [`ASAK/docs/wiki/current-status-baseline.md`](ASAK/docs/wiki/current-status-baseline.md) |
 | **WBS / 할 일** | [`ASAK/docs/wiki/wbs-v2.md`](ASAK/docs/wiki/wbs-v2.md) · [`wbs-status-notes.md`](ASAK/docs/wiki/wbs-status-notes.md) |
-| UI 화면 매핑 (Figma↔코드) | [`UI-INDEX.md`](UI-INDEX.md) |
+| UI 화면 매핑 (Figma↔코드) | [`ui-index.md`](ui-index.md) |
 | 중앙 문서 허브 | [`ASAK/docs/README.md`](ASAK/docs/README.md) · [`ASAK/PROJECT_HUB.md`](ASAK/PROJECT_HUB.md) |
-| 구현 맵 | [`ASAK/docs/planning/CURRENT_IMPLEMENTATION_MAP.md`](ASAK/docs/planning/CURRENT_IMPLEMENTATION_MAP.md) |
+| 구현 맵 | [`ASAK/docs/planning/current-implementation-map-2026-07-16.md`](ASAK/docs/planning/current-implementation-map-2026-07-16.md) |
+| 앱 구현 허브 | [`ASAK/docs/planning/app-implementation-hub.md`](ASAK/docs/planning/app-implementation-hub.md) |
 | Kiosk 계획·구조 | [`ASAK-Kiosk/IMPLEMENTATION_PLAN.md`](ASAK-Kiosk/IMPLEMENTATION_PLAN.md) · [`STRUCTURE_GUIDE`](ASAK-Kiosk/src/STRUCTURE_GUIDE.md) |
 | Admin 계획·구조 | [`ASAK-Admin/IMPLEMENTATION_PLAN.md`](ASAK-Admin/IMPLEMENTATION_PLAN.md) · [`STRUCTURE_GUIDE`](ASAK-Admin/src/STRUCTURE_GUIDE.md) |
 | Backend 계획 | [`ASAK-back/IMPLEMENTATION_PLAN.md`](ASAK-back/IMPLEMENTATION_PLAN.md) |
-| Figma 토큰 보고서 | [`ASAK/docs/design/FIGMA-TOKEN-REPORT.md`](ASAK/docs/design/FIGMA-TOKEN-REPORT.md) |
+| Figma 토큰 보고서 | [`ASAK/docs/design/figma-token-report.md`](ASAK/docs/design/figma-token-report.md) |
 | Bruno API | [`ASAK-back/api/`](ASAK-back/api/) |
 
 정책 정본은 `ASAK/docs/product_bible/` ([얇은 안내](ASAK/docs/product_bible/README.md)). **한물간 문서**는 `ASAK/docs/archive/` — 실행에 쓰지 마세요.
@@ -41,4 +42,4 @@ git commit -m "your message"
 git push
 ```
 
-워크스페이스 메타(README, UI-INDEX, submodule SHA)만 루트에서 커밋합니다.
+워크스페이스 메타(README, ui-index, submodule SHA)만 루트에서 커밋합니다.
