@@ -48,9 +48,13 @@ function Get-PowerModeSettings {
         "powermode.explosions.duration" = 5000
         "powermode.explosions.frequency" = 1
         "powermode.explosions.maxExplosions" = 1
-        "powermode.explosions.offset" = 1.2
-        "powermode.explosions.size" = 8
-        "powermode.explosions.customCss" = @{ "background-position" = "center bottom" }
+        "powermode.explosions.offset" = 0.9
+        "powermode.explosions.size" = 5
+        "powermode.explosions.customCss" = @{
+            "background-position" = "center center"
+            "background-size"     = "contain"
+            "background-repeat"   = "no-repeat"
+        }
         "powermode.explosions.backgroundMode" = "image"
         "powermode.combo.threshold" = 0
     }

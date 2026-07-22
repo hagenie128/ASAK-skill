@@ -36,3 +36,7 @@ node_modules/
 dist/
 .vite/
 *.local
+
+# Personal study notes (do not push)
+_local_study/
+
