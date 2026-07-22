@@ -5,6 +5,7 @@
 .capture/
 .tmp-admin-refs/
 _rollback_backup/
+_archive/
 asak-agent-kit/
 
 # Editor
