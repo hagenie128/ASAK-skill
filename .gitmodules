@@ -9,4 +9,4 @@
 	url = https://github.com/hagenie128/ASAK_Admin.git
 [submodule "ASAK-back"]
 	path = ASAK-back
-	url = https://github.com/hagenie128/ASAK-back.git
+	url = https://github.com/nayeon0828/ASAK-backend.git
