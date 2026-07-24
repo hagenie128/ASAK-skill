@@ -1,0 +1,7 @@
+# Commit Message Rules
+
+- Generate Commit Message / 자동 커밋 메시지는 **반드시 한국어**로 작성한다.
+- 형식: `타입: 요약` (예: `docs: 뷰 SQL 설명 주석 추가`, `feat: 주문 목록 API 추가`)
+- 타입은 Conventional Commits 스타일 영문 유지 가능: `feat`, `fix`, `docs`, `chore`, `refactor`, `test`, `style`, `perf`
+- 본문(요약·설명)은 한글로, 왜 바꿨는지 중심으로 1~2문장.
+- 영어 커밋 메시지를 쓰지 않는다.
