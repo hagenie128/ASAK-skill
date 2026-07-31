@@ -1,7 +1,0 @@
-# Release artifacts
-release/
-*.zip
-
-# Local editor and operating-system files
-.DS_Store
-Thumbs.db
