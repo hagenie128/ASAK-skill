@@ -1,8 +1,8 @@
 {
   "name": "ASAK Agent Kit",
   "repository": "asak-agent-kit",
-  "version": "2.1.0",
-  "date": "2026-07-16",
+  "version": "2.2.0",
+  "date": "2026-07-31",
   "commands": [
     "가격",
     "수량",
@@ -32,6 +32,8 @@
     "preserve existing settings",
     "no destructive delete",
     "no force push",
+    "no remote git changes without approval",
     "verify before completion"
-  ]
+  ],
+  "source_of_truth": "sources/skills"
 }
