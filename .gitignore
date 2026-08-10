@@ -7,6 +7,7 @@
 _rollback_backup/
 _archive/
 /asak-agent-kit/
+/asak-skill-docs-fixed/
 
 # Editor
 .vscode/
@@ -19,11 +20,14 @@ _archive/
 Thumbs.db
 Desktop.ini
 
-# Temp captures & one-off assets at workspace root
+# Temp captures & one-off API scratch at workspace root
 /tmp-*.png
 /asak-food*.png
 /asak-lettuce.png
 /asak-salad*.png
+/_tmp/
+/_*.json
+/_*.txt
 
 # Logs / env
 *.log

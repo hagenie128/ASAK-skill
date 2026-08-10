@@ -14,7 +14,7 @@ description: "ASAK 코드 공부·복습 레포트. Use when the user says 공�
 기본 설명 정본은 팀 공용 ASAK 문서 저장소의 다음 파일이다.
 
 ```text
-docs/ai-reports/ASAK_STUDY_EXAMPLE_CANONICAL.md
+docs/study/ai-review/ASAK_STUDY_EXAMPLE_CANONICAL.md
 ```
 
 작업 시작 전 실제 위치를 찾아 읽고, 개인 PC 절대경로를 기준으로 고정하지 않는다.
@@ -26,7 +26,7 @@ docs/ai-reports/ASAK_STUDY_EXAMPLE_CANONICAL.md
 5. 대상 저장소에 다음 형식으로 레포트를 만든다.
 
 ```text
-docs/ai-reports/YYYY-MM-DD/asak-study-<짧은-주제>.md
+docs/study/ai-review/YYYY-MM-DD/asak-study-<짧은-주제>.md
 ```
 
 6. 폴더가 없으면 만든다.
