@@ -1,0 +1,18 @@
+{
+  "name": "asak-agent-kit",
+  "version": "2.1.0",
+  "description": "ASAK project workflows and Korean review skills for Codex",
+  "author": {
+    "name": "ASAK Team"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "ASAK Agent Kit",
+    "shortDescription": "ASAK project review skills for Codex.",
+    "longDescription": "Provides ASAK project guidance and reusable review workflows for prices, quantities, orders, APIs, UI, tests, and releases.",
+    "developerName": "ASAK Team",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "ASAK 프로젝트를 수정하지 말고 먼저 점검해줘."
+  }
+}

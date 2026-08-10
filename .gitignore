@@ -40,3 +40,6 @@ dist/
 # Personal study notes (do not push)
 _local_study/
 
+# Release artifacts (Agent Kit 배포본)
+release/
+*.zip
