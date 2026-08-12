@@ -1,3 +1,6 @@
+__pycache__/
+*.pyc
+
 # Local tool / agent scratch (root only — packages/ 배포본은 추적)
 .agents/
 /.claude/
