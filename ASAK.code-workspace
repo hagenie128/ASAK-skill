@@ -7,6 +7,10 @@
     { "name": "ASAK-back", "path": "ASAK-back" }
   ],
   "settings": {
+    "todo-tree.tree.sortTagsOnlyViewAlphabetically": true,
+    "todo-tree.tree.flat": false,
+    "todo-tree.tree.tagsOnly": true,
+    "todo-tree.ripgrep": "C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BurntSushi.ripgrep.MSVC_Microsoft.Winget.Source_8wekyb3d8bbwe\\ripgrep-15.2.0-x86_64-pc-windows-msvc\\rg.exe",
     "git.autoRepositoryDetection": true,
     "git.detectSubmodules": true,
     "git.detectSubmodulesLimit": 20,
