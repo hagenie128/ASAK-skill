@@ -43,3 +43,9 @@
 - `docs/notion`, `worklog/daily` (스크립트 입력)
 
 태그·KEEP 목록: [`ASAK/docs/document-tag-index-2026-07-20.md`](ASAK/docs/document-tag-index-2026-07-20.md)
+# 로컬 보조 폴더 (2026-08-13)
+
+- `tools/data-audit/`: 메뉴·시드 데이터 점검용 임시 스크립트. 실행 전 대상 DB와 입력 경로를 확인한다.
+- `backups/antigravity/`: 에디터 설정 백업. 날짜별 하위 폴더를 유지한다.
+- `study/`: 날짜별 개인 학습 노트. 구현 정본 문서와 구분한다.
+- `_archive/`: 완료된 생성물·이전 보관 자료. 삭제 전 임시 보관을 우선한다.

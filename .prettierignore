@@ -10,7 +10,6 @@ frontend/dist/
 .git/
 .agents/
 .cursor/
-.vscode/
 .codex/
 
 *.log
