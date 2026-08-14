@@ -1,0 +1,7 @@
+interface:
+  display_name: "깃반영"
+  short_description: "승인된 범위의 브랜치·한글 커밋·병합 반영"
+  default_prompt: "Use $asak-git-publish to inspect and safely publish my approved repository changes."
+
+policy:
+  allow_implicit_invocation: true

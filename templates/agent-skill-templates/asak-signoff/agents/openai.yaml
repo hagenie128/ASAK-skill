@@ -1,0 +1,7 @@
+interface:
+  display_name: "퇴근"
+  short_description: "근거 기반 작업기록·문서·Notion 마감"
+  default_prompt: "Use $asak-signoff to verify today's work and update the matching worklog and documentation."
+
+policy:
+  allow_implicit_invocation: true

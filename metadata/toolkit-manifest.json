@@ -1,8 +1,8 @@
 {
   "name": "ASAK Agent Kit",
-  "repository": "asak-agent-kit",
+  "repository": "ASAK-skill",
   "version": "2.2.0",
-  "date": "2026-07-31",
+  "date": "2026-08-14",
   "commands": [
     "가격",
     "수량",

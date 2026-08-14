@@ -1,0 +1,4 @@
+interface:
+  display_name: "ASAK DevCopilot Sync"
+  short_description: "DevCopilot 전 항목 점검과 안전한 동기화"
+  default_prompt: "ASAK DevCopilot workspace 2의 Wiki, 요구사항, WBS, API, 시나리오, QA, 화면, DB를 점검하고 업데이트 후보와 MCP 미지원 항목을 정리해줘."

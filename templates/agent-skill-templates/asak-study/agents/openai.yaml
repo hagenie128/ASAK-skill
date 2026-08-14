@@ -1,0 +1,7 @@
+interface:
+  display_name: "공부"
+  short_description: "ASAK 코드 흐름 분석과 정본 기준 학습 레포트 작성"
+  default_prompt: "Use $asak-study to study this ASAK feature and leave a canonical-depth report in the target repository."
+
+policy:
+  allow_implicit_invocation: true
