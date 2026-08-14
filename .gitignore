@@ -1,52 +1,32 @@
 __pycache__/
 *.pyc
 
-# Local tool / agent scratch (root only — packages/ 배포본은 추적)
+# Local tool state
 .agents/
 /.claude/
 /.codex/
 .capture/
-.tmp-admin-refs/
-_rollback_backup/
 _archive/
-/asak-agent-kit/
-/asak-skill-docs-fixed/
 
-# Editor
+# Editor / OS
 .vscode/
 .idea/
 *.swp
 *.swo
-
-# OS
 .DS_Store
 Thumbs.db
 Desktop.ini
 
-# Temp captures & one-off API scratch at workspace root
-/tmp-*.png
-/asak-food*.png
-/asak-lettuce.png
-/asak-salad*.png
-/_tmp/
-/_*.json
-/_*.txt
-
-# Logs / env
+# Logs / environment
 *.log
 .env
 .env.*
 !.env.example
 
-# Node / build (if ever run at workspace root)
+# Build and release artifacts
 node_modules/
 dist/
 .vite/
 *.local
-
-# Personal study notes (do not push)
-_local_study/
-
-# Release artifacts (Agent Kit 배포본)
 release/
 *.zip
