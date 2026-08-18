@@ -36,12 +36,12 @@
 
 ## 3. 갱신한 문서
 
-1. `ASAK/docs/product_bible/03_Menu_Inventory_SoldOut/docs/09-features/menu-management/MENU_MANAGEMENT_API_CONTRACT.md`
-2. `ASAK/docs/product_bible/11_Backend_Implementation/docs/12-backend-implementation/02-menu/MENU_MANAGEMENT_IMPLEMENTATION.md`
-3. `ASAK/docs/product_bible/03_Menu_Inventory_SoldOut/docs/09-features/menu/MENU_API_CONTRACT.md`
-4. `ASAK/docs/product_bible/03_Menu_Inventory_SoldOut/docs/09-features/menu-management/MENU_MANAGEMENT_EDGE_CASE_AND_QA.md`
-5. `ASAK/docs/product_bible/09_QA_Bible/docs/10-qa/02-admin/MENU_MANAGEMENT_TESTS.md`
-6. `ASAK/docs/product_bible/03_Menu_Inventory_SoldOut/docs/09-features/menu-management/MENU_MANAGEMENT_ARCHITECTURE.md` (§9만)
+1. `ASAK/docs/product_bible/03_Menu_Inventory_SoldOut/menu-management/MENU_MANAGEMENT_API_CONTRACT.md`
+2. `ASAK/docs/product_bible/11_Backend_Implementation/02-menu/MENU_MANAGEMENT_IMPLEMENTATION.md`
+3. `ASAK/docs/product_bible/03_Menu_Inventory_SoldOut/menu/MENU_API_CONTRACT.md`
+4. `ASAK/docs/product_bible/03_Menu_Inventory_SoldOut/menu-management/MENU_MANAGEMENT_EDGE_CASE_AND_QA.md`
+5. `ASAK/docs/product_bible/09_QA_Bible/02-admin/MENU_MANAGEMENT_TESTS.md`
+6. `ASAK/docs/product_bible/03_Menu_Inventory_SoldOut/menu-management/MENU_MANAGEMENT_ARCHITECTURE.md` (§9만)
 7. 본 보고서: `docs/ai-reports/2026-08-11/asak-doc-sync-admin-menu-soft-delete.md` (+ ASAK 경로 복사)
 
 ## 4. 변경 근거
